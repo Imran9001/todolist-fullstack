@@ -1,0 +1,23 @@
+GET http://localhost:3000/todo
+###
+POST http://localhost:3000/todo
+Content-Type: application/json
+
+{
+  "title": "Buy apples",
+  "completed": true
+}
+
+###
+
+PUT http://localhost:3000/todo/6845f0af9b78dd02cb7c93a7
+Content-Type: application/json
+
+{
+  "title": "Buy milk",
+  "completed": true
+}
+
+###
+
+DELETE http://localhost:3000/todo/6845f1509b78dd02cb7c93ab

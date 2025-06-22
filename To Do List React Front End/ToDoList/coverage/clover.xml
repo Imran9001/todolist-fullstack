@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1750549362138" clover="3.2.0">
+  <project timestamp="1750549362138" name="All files">
+    <metrics statements="66" coveredstatements="66" conditionals="14" coveredconditionals="14" methods="20" coveredmethods="20" elements="100" coveredelements="100" complexity="0" loc="66" ncloc="66" packages="1" files="5" classes="5"/>
+    <file name="App.jsx" path="C:\Users\imran\OneDrive - Edge Hill University\JavaScript Projects\To Do List React Front End\ToDoList\src\App.jsx">
+      <metrics statements="36" coveredstatements="36" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="8"/>
+      <line num="7" count="22" type="stmt"/>
+      <line num="8" count="22" type="stmt"/>
+      <line num="9" count="22" type="stmt"/>
+      <line num="11" count="22" type="stmt"/>
+      <line num="12" count="8" type="stmt"/>
+      <line num="13" count="8" type="stmt"/>
+      <line num="14" count="8" type="stmt"/>
+      <line num="15" count="8" type="stmt"/>
+      <line num="16" count="7" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="20" count="1" type="stmt"/>
+      <line num="24" count="8" type="stmt"/>
+      <line num="28" count="22" type="stmt"/>
+      <line num="29" count="8" type="stmt"/>
+      <line num="32" count="22" type="stmt"/>
+      <line num="33" count="2" type="stmt"/>
+      <line num="34" count="2" type="stmt"/>
+      <line num="35" count="1" type="stmt"/>
+      <line num="39" count="1" type="stmt"/>
+      <line num="40" count="1" type="stmt"/>
+      <line num="45" count="22" type="stmt"/>
+      <line num="47" count="2" type="stmt"/>
+      <line num="48" count="2" type="stmt"/>
+      <line num="49" count="1" type="stmt"/>
+      <line num="50" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="54" count="1" type="stmt"/>
+      <line num="55" count="1" type="stmt"/>
+      <line num="59" count="22" type="stmt"/>
+      <line num="60" count="2" type="stmt"/>
+      <line num="61" count="2" type="stmt"/>
+      <line num="62" count="2" type="stmt"/>
+      <line num="65" count="1" type="stmt"/>
+      <line num="66" count="1" type="stmt"/>
+      <line num="70" count="22" type="cond" truecount="2" falsecount="0"/>
+      <line num="71" count="14" type="cond" truecount="2" falsecount="0"/>
+      <line num="73" count="10" type="stmt"/>
+    </file>
+    <file name="Operations.js" path="C:\Users\imran\OneDrive - Edge Hill University\JavaScript Projects\To Do List React Front End\ToDoList\src\Operations.js">
+      <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="10" count="1" type="stmt"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="15" count="1" type="stmt"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="20" count="1" type="stmt"/>
+      <line num="21" count="1" type="stmt"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="25" count="1" type="stmt"/>
+    </file>
+    <file name="TaskForm.jsx" path="C:\Users\imran\OneDrive - Edge Hill University\JavaScript Projects\To Do List React Front End\ToDoList\src\TaskForm.jsx">
+      <metrics statements="10" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <line num="5" count="19" type="stmt"/>
+      <line num="7" count="19" type="stmt"/>
+      <line num="8" count="4" type="stmt"/>
+      <line num="9" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="15" count="3" type="stmt"/>
+      <line num="16" count="3" type="stmt"/>
+      <line num="20" count="19" type="stmt"/>
+      <line num="28" count="3" type="stmt"/>
+    </file>
+    <file name="TaskItem.jsx" path="C:\Users\imran\OneDrive - Edge Hill University\JavaScript Projects\To Do List React Front End\ToDoList\src\TaskItem.jsx">
+      <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
+      <line num="5" count="20" type="stmt"/>
+      <line num="23" count="2" type="stmt"/>
+      <line num="28" count="2" type="stmt"/>
+    </file>
+    <file name="TaskList.jsx" path="C:\Users\imran\OneDrive - Edge Hill University\JavaScript Projects\To Do List React Front End\ToDoList\src\TaskList.jsx">
+      <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <line num="5" count="12" type="stmt"/>
+      <line num="11" count="22" type="stmt"/>
+    </file>
+  </project>
+</coverage>
