@@ -2,7 +2,7 @@ Full-Stack To-Do List Application
 
 A modern, responsive full-stack To-Do List application, enabling users to efficiently manage their tasks. This project demonstrates proficiency in building robust web applications from end-to-end, featuring a React frontend, a Node.js Express backend with a MongoDB Atlas database, and comprehensive cloud deployment using AWS and Docker. A key focus of this project was ensuring high code quality and reliability through extensive unit testing across both frontend and backend.
 
-Live Demo
+Live Demo:
 todolist.it.com
 
 Features
