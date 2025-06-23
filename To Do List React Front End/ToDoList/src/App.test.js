@@ -97,9 +97,9 @@ describe('App Component', () => {
 
     await waitFor(() => screen.getByText('Task One'));
 
-    // Find the delete button for Task One (assuming unique label or find by role + sibling)
+    // Find the delete button for Task One 
     const deleteButtons = screen.getAllByRole('button', { name: /delete/i });
-    // Let's assume first button corresponds to first task
+    
     fireEvent.click(deleteButtons[0]);
 
     await waitFor(() => {

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import TaskList from './TaskList';
 import '@testing-library/jest-dom';
 
-// Mock TaskItem to isolate TaskList tests
+
 jest.mock('./TaskItem', () => ({ task, onToggleComplete, onDeleteTask }) => (
   <li data-testid="task-item">{task.title}</li>
 ));
@@ -22,14 +22,14 @@ describe('TaskList', () => {
 
     render(<TaskList tasks={tasks} onToggleComplete={jest.fn()} onDeleteTask={jest.fn()} />);
 
-    // Should NOT see the "no tasks" message
+    
     expect(screen.queryByText(/no tasks yet/i)).not.toBeInTheDocument();
 
-    // Should render TaskItem for each task
+    
     const taskItems = screen.getAllByTestId('task-item');
     expect(taskItems).toHaveLength(tasks.length);
 
-    // Optional: Check that task titles are rendered inside mocked TaskItem
+    
     expect(taskItems[0]).toHaveTextContent('Task One');
     expect(taskItems[1]).toHaveTextContent('Task Two');
   });
