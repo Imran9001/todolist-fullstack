@@ -1,16 +1,7 @@
 # .github/workflows/frontend-ci.yml
 name: Frontend CI
 
-on:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'To Do List React Front End/**'
-  pull_request:
-    branches: [ "main" ]
-    paths:
-      - 'To Do List React Front End/**'
-      - '.github/workflows/frontend-ci.yml'
+on: push
 
 jobs:
   test-frontend:
