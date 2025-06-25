@@ -3,13 +3,11 @@ name: Frontend CI
 
 on:
   push:
-    branches:
-      - "main"
+    branches: [ "main" ]
     paths:
       - 'To Do List React Front End/**'
   pull_request:
-    branches:
-      - "main"
+    branches: [ "main" ]
     paths:
       - 'To Do List React Front End/**'
 
