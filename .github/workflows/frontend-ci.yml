@@ -1,0 +1,28 @@
+# .github/workflows/frontend-ci.yml
+name: Frontend CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  paths:
+    - 'To Do List React Front End/**'
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies and Run Tests
+        run: |
+          cd "To Do List React Front End/ToDoList"
+          npm ci
+          npm test
