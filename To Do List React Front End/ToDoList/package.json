@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "react-scripts test --coverage --watchAll=false"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -30,6 +30,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
     "jest-environment-jsdom": "^30.0.2",
+    "react-scripts": "^5.0.1",
     "vite": "^6.3.5"
   },
   "babel": {
