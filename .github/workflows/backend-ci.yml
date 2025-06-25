@@ -1,16 +1,6 @@
 name: Backend CI
 
-on:
-  push:
-    branches:
-      - "main"
-    paths:
-      - 'To Do List Back End/**'
-  pull_request:
-    branches:
-      - "main"
-    paths:
-      - 'To Do List Back End/**'
+on: push
 
 jobs:
   test-backend:
