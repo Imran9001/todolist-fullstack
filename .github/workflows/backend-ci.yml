@@ -6,6 +6,7 @@ on:
       - "main"
     paths:
       - 'To Do List Back End/**'
+      - '.github/workflows/backend-ci.yml'
   pull_request:
     branches:
       - "main"
