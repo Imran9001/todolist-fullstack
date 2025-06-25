@@ -1,0 +1,32 @@
+name: Run Backend and Frontend Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        project:
+          - 'To Do List Back End'
+          - 'To Do List React Front End/ToDoList'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies and run tests for ${{ matrix.project }}
+        working-directory: ${{ matrix.project }}
+        run: |
+          npm install --legacy-peer-deps
+          npm test
