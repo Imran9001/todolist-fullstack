@@ -106,7 +106,7 @@ jobs:
       - name: Deploy static site to S3
         working-directory: ./To Do List React Front End/ToDoList
         run: |
-          aws s3 sync ./build s3://${{ env.S3_BUCKET_NAME }} --delete
+          aws s3 sync ./dist s3://${{ env.S3_BUCKET_NAME }} --delete
 
       # Step 6: Create a CloudFront invalidation. This clears the cache, forcing
       # users to receive the latest version of the frontend files.
