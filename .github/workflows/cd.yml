@@ -1,0 +1,115 @@
+name: Continuous Deployment to AWS
+
+on:
+  push:
+    branches:
+      - main
+env:
+  AWS_REGION: eu-west-2
+  ECR_REPOSITORY: todo-backend        
+  ECS_CLUSTER_NAME: todo-cluster
+  ECS_SERVICE_NAME: todo-backend-task-service-jhwknw6i
+  ECS_TASK_DEFINITION: .aws/task-definition.json     
+  CONTAINER_NAME: todo-backend 
+  S3_BUCKET_NAME: todo-frontend999
+  CLOUDFRONT_DISTRIBUTION_ID: E1MC867L2JOZU6
+
+jobs:
+  deploy-backend:
+    name: Build and Deploy Backend to ECS
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out the repository code so the workflow can access it.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Configure AWS credentials. This action uses stored secrets to 
+      # authenticate with my AWS account.
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Step 3: Log in to Amazon Elastic Container Registry (ECR).
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Step 4: Build the Docker image, tag it, and push it to ECR.
+      # Tag the image with Git commit SHA for versioning. Docker file is used here.
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        working-directory: ./To Do List Back End 
+        run: |
+          IMAGE_TAG="${{ github.sha }}"
+          docker build -t ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG .
+          docker push ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
+          echo "image=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      # Step 5: Downloads the existing task definition file from  repository and
+      # inserts the new ECR image URI into it.
+      - name: Render new task definition
+        id: render-task-definition
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      # Step 6: Deploy the new task definition to the ECS service. This will trigger
+      # a rolling deployment, safely replacing the old tasks with the new ones.
+      - name: Deploy to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-task-definition.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE_NAME }}
+          cluster: ${{ env.ECS_CLUSTER_NAME }}
+          wait-for-service-stability: true # Waits for the deployment to be complete and healthy
+
+
+  deploy-frontend:
+    name: Build and Deploy Frontend to S3
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out the repository code.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Configure AWS credentials.
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Step 3: Set up Node.js. Caching is enabled for faster dependency installation.
+      - name: Setup Node.js and cache dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: 'To Do List React Front End/ToDoList/package-lock.json'
+
+      # Step 4: Install dependencies and create a production build of the React app.
+      - name: Install dependencies and build
+        working-directory: ./To Do List React Front End/ToDoList # Assumes your React app is here
+        run: |
+          npm ci
+          npm run build
+
+      # Step 5: Sync the contents of the build folder to  S3 bucket.
+      # The --delete flag removes old files from the bucket.
+      - name: Deploy static site to S3
+        working-directory: ./To Do List React Front End/ToDoList
+        run: |
+          aws s3 sync ./build s3://${{ env.S3_BUCKET_NAME }} --delete
+
+      # Step 6: Create a CloudFront invalidation. This clears the cache, forcing
+      # users to receive the latest version of the frontend files.
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
